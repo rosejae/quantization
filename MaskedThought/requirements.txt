@@ -6,7 +6,7 @@ nltk
 pytest
 scikit-learn
 sentencepiece
-transformers==4.36.2
+transformers==4.46.3
 huggingface_hub
 accelerate
 protobuf
