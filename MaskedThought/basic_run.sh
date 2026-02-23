@@ -3,7 +3,7 @@
 export exp_name='base_gsm8k_sft'
 export base_model_name='meta-llama/Llama-3.2-1B'
 
-torchrun --nproc_per_node=8 --use_env main.py \
+torchrun --nproc_per_node=4 main.py \
     --do_train \
     --scene llama_generation \
     --report_to none \
