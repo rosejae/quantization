@@ -17,7 +17,7 @@ torchrun --nproc_per_node=4 main.py \
     --gradient_accumulation_steps 8 \
     --per_device_eval_batch_size 1 \
     --exp_name ${exp_name} \
-    --train_dir data/Llama8b_synthetic.json \
+    --train_dir data/Llama8b_synthetic_output.json \
     --eval_dir data/gsm8k_train.json \
     --gradient_checkpointing False \
     --tok_max_length 512 \
