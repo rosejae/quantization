@@ -91,7 +91,12 @@ def gsm8k_test(model, data_path, start=0, end=MAX_INT, batch_size=1, tensor_para
     stop_tokens = ["Question:", "Question", "USER:", "USER", "ASSISTANT:", "ASSISTANT", "Instruction:", "Instruction", "Response:", "Response"]
     sampling_params = SamplingParams(temperature=0 ,top_p=1.0, max_tokens=1024, stop=stop_tokens)
     print('sampleing =====', sampling_params)
-    llm = LLM(model=model,tensor_parallel_size=tensor_parallel_size)
+    llm = LLM(model=model,
+              tensor_parallel_size=tensor_parallel_size, 
+              tokenizer=args.tokenizer, 
+              quantization=args.quantized_arg,
+              dtype=args.dtype,
+              )
 
     print('#### Model was loaded !!!! ####')
     result = []
@@ -138,12 +143,16 @@ def gsm8k_test(model, data_path, start=0, end=MAX_INT, batch_size=1, tensor_para
 def parse_args():
     parser = argparse.ArgumentParser()
     parser.add_argument("--model", type=str)  # model path
-    parser.add_argument("--outdir", type=str,default='output_answer')  # model path
+    parser.add_argument("--tokenizer", type=str)  # model path
+    parser.add_argument("--outdir", type=str,default='output_answer')  # output
+    parser.add_argument("--quantized_arg", type=str,default='GGUF')  # Quantization type
     parser.add_argument("--data_file", type=str, default='')  # data path
     parser.add_argument("--start", type=int, default=0) #start index
     parser.add_argument("--end", type=int, default=MAX_INT)  # end index
     parser.add_argument("--batch_size", type=int, default=400)  # batch_size
     parser.add_argument("--tensor_parallel_size", type=int, default=4)  # tensor_parallel_size
+    parser.add_argument("--dtype", type=str, default="float16")
+    
     return parser.parse_args()
 if __name__ == "__main__":
     args = parse_args()
