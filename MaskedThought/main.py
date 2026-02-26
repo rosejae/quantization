@@ -31,8 +31,8 @@ except:
 from data.tokenizer_utils import prepare_tokenizer
 from concurrent.futures import ThreadPoolExecutor, wait, FIRST_COMPLETED, as_completed, ALL_COMPLETED
 DEFAULT_PAD_TOKEN = "[PAD]"
-DEFAULT_EOS_TOKEN = "</s>"
-DEFAULT_BOS_TOKEN = "<s>"
+# DEFAULT_EOS_TOKEN = "</s>"
+# DEFAULT_BOS_TOKEN = "<s>"
 DEFAULT_UNK_TOKEN = "<unk>"
 # from vllm import LLM
 # import time
@@ -82,16 +82,16 @@ def main():
     special_tokens_dict = dict()
     if auto_tokenizer.pad_token is None:
         special_tokens_dict["pad_token"] = DEFAULT_PAD_TOKEN
-    if auto_tokenizer.eos_token is None:
-        special_tokens_dict["eos_token"] = DEFAULT_EOS_TOKEN
-    if auto_tokenizer.bos_token is None:
-        special_tokens_dict["bos_token"] = DEFAULT_BOS_TOKEN
+    # if auto_tokenizer.eos_token is None:
+    #     special_tokens_dict["eos_token"] = DEFAULT_EOS_TOKEN
+    # if auto_tokenizer.bos_token is None:
+    #     special_tokens_dict["bos_token"] = DEFAULT_BOS_TOKEN
     if auto_tokenizer.unk_token is None:
         special_tokens_dict["unk_token"] = DEFAULT_UNK_TOKEN
 
     auto_tokenizer.unk_token = "<unk>"
-    auto_tokenizer.bos_token = "<s>"
-    auto_tokenizer.eos_token = "</s>"
+    # auto_tokenizer.bos_token = "<s>"
+    # auto_tokenizer.eos_token = "</s>"
 
     auto_tokenizer.add_special_tokens(special_tokens_dict)
     auto_tokenizer.add_tokens(["<mask>"])
